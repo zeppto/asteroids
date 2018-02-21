@@ -16,9 +16,12 @@ public:
 	BulletHandler(const BulletHandler& other);
 	BulletHandler& operator=(const BulletHandler& other);
 
+	int getNrOfBullets() const;
+
 	void add(sf::Vector2f direction, sf::Vector2f position, float rotation);
 	bool remove(int index);
 	void bulletLife();
+	bool getABulletCollision(int index, sf::Sprite collider);
 
 	void update(float dt);
 };

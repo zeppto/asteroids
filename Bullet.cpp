@@ -31,6 +31,16 @@ int Bullet::getLifeTimer() const
 	return lifeTimer;
 }
 
+bool Bullet::colliding(sf::Sprite colider)
+{
+	bool returnBool = false;
+	if (mSpriteSheet.getGlobalBounds().intersects(colider.getGlobalBounds()))
+	{
+		returnBool = true;
+	}
+	return returnBool;
+}
+
 void Bullet::Update(float dt)
 {
 	mSpriteSheet.move(getDirection() * getSpeed()* dt);

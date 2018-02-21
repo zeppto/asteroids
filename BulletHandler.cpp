@@ -59,6 +59,11 @@ BulletHandler & BulletHandler::operator=(const BulletHandler & other)
 	return *this;
 }
 
+int BulletHandler::getNrOfBullets() const
+{
+	return nrOfBullets;
+}
+
 void BulletHandler::add(sf::Vector2f direction, sf::Vector2f position, float rotation)
 {
 	if (capacity == nrOfBullets)
@@ -84,9 +89,21 @@ void BulletHandler::bulletLife()
 {
 	for (int i = 0; i < nrOfBullets; i++)
 	{
-		if (bullets[i]->getLifeTimer() >= 3000)
+		if (bullets[i]->getLifeTimer() >= 2000)
 			remove(i);
 	}
+}
+
+bool BulletHandler::getABulletCollision(int index, sf::Sprite collider)
+{
+	bool isTrue = false;
+	if (index < nrOfBullets)
+	{
+		isTrue = bullets[index]->colliding(collider);
+		if(isTrue)
+			remove(index);
+	}
+	return isTrue;
 }
 
 void BulletHandler::update(float dt)

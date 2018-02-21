@@ -10,6 +10,7 @@ public:
 	Asteroid();
 
 	void Update(float dt);
+	sf::Sprite getSprite() const;
 private:
 	sf::Texture mTexture;
 	sf::Sprite mSpriteSheet;

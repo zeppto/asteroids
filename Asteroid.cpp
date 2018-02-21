@@ -22,11 +22,16 @@ Asteroid::Asteroid()
 void Asteroid::Update(float dt)
 {
 	mSpriteSheet.move(getDirection() * dt);
-
+	mSpriteSheet.rotate(0.01f);
 	edgeOfScreen(mSpriteSheet);
 }
 
 void Asteroid::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(mSpriteSheet, states);
+}
+
+sf::Sprite Asteroid::getSprite() const
+{
+	return mSpriteSheet;
 }

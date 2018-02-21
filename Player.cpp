@@ -80,6 +80,16 @@ void Player::shoot(float dt)
 	bulletTimer += 100*dt;
 }
 
+int Player::getNrOfBullets() const
+{
+	return bulletHandeler.getNrOfBullets();
+}
+
+bool Player::getBulletCollision(int index, sf::Sprite collider)
+{
+	return bulletHandeler.getABulletCollision(index, collider);
+}
+
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(bulletHandeler, states);
