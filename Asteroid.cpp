@@ -17,6 +17,8 @@ Asteroid::Asteroid()
 
 	setDirectionX(rand() % 200 - 100);
 	setDirectionY(rand() % 200 - 100);
+	//bra för temp textur   
+	mTexture.setSmooth(true);
 }
 
 void Asteroid::Update(float dt)
@@ -24,6 +26,11 @@ void Asteroid::Update(float dt)
 	mSpriteSheet.move(getDirection() * dt);
 	mSpriteSheet.rotate(0.01f);
 	edgeOfScreen(mSpriteSheet);
+}
+
+sf::Vector2f Asteroid::getPos() const
+{
+	return mSpriteSheet.getPosition();
 }
 
 void Asteroid::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -34,4 +41,14 @@ void Asteroid::draw(sf::RenderTarget & target, sf::RenderStates states) const
 sf::Sprite Asteroid::getSprite() const
 {
 	return mSpriteSheet;
+}
+
+void Asteroid::setScale(sf::Vector2f scale)
+{
+	mSpriteSheet.setScale(scale);
+}
+
+void Asteroid::setPos(float x, float y)
+{
+	mSpriteSheet.setPosition(x, y);
 }

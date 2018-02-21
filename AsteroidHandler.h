@@ -1,6 +1,8 @@
 #ifndef ASTEROIDHANDLER_H
 #define ASTEROIDHANDLER_H
-#include "Asteroid.hpp"
+#include "BigAsteroid.h"
+#include "MediumAsteroid.h"
+#include "SmallAsteroid.h"
 
 class AsteroidHandler : public sf::Drawable
 {
@@ -18,8 +20,13 @@ public:
 	AsteroidHandler(const AsteroidHandler& other);
 	AsteroidHandler& operator=(const AsteroidHandler& other);
 
+	int getNrOfAsteroid() const;
+	sf::Sprite getASprite(int index) const;
+
 	void starSpwan();
 	bool remove(int index);
+	void addMedium(sf::Vector2f pos);
+	void addSmall(sf::Vector2f pos);
 
 	void update(float dt);
 };

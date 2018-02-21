@@ -4,7 +4,7 @@
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	sf::RenderWindow window(sf::VideoMode(1600, 900), "Game Window");
+	sf::RenderWindow window(sf::VideoMode(1600, 900), "Asteroid");
 	Game game;
 	sf::Clock gameTime;
 

@@ -11,6 +11,10 @@ public:
 
 	void Update(float dt);
 	sf::Sprite getSprite() const;
+	sf::Vector2f getPos() const;
+
+	void setScale(sf::Vector2f scale);
+	void setPos(float x, float y);
 private:
 	sf::Texture mTexture;
 	sf::Sprite mSpriteSheet;

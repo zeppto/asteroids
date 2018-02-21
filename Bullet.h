@@ -16,7 +16,7 @@ public:
 	Bullet(sf::Vector2f direction, sf::Vector2f position, float rotation, float speed = 500);
 
 	int getLifeTimer() const;
-	bool colliding( sf::Sprite colider);
+	bool colliding(sf::Sprite colider);
 
 	void Update(float dt);
 };

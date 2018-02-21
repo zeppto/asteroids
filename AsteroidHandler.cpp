@@ -14,6 +14,8 @@ void AsteroidHandler::expand()
 
 void AsteroidHandler::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	for (int i = 0; i < nrOfAstroids; i++)
+		target.draw(*asterods[i], states);
 }
 
 AsteroidHandler::AsteroidHandler(int capacity)
@@ -62,6 +64,16 @@ AsteroidHandler & AsteroidHandler::operator=(const AsteroidHandler & other)
 	return *this;
 }
 
+int AsteroidHandler::getNrOfAsteroid() const
+{
+	return nrOfAstroids;
+}
+
+sf::Sprite AsteroidHandler::getASprite(int index) const
+{
+	return asterods[index]->getSprite();
+}
+
 void AsteroidHandler::starSpwan()
 {
 	if (nrOfAstroids == 0)
@@ -71,7 +83,7 @@ void AsteroidHandler::starSpwan()
 			expand();
 		for (int i = 0; i < nrToSpwan; i++)
 		{
-			asterods[i] = new Asteroid();//lägtill stora astroider
+			asterods[i] = new BigAsteroid();
 			nrOfAstroids++;
 		}
 	}
@@ -80,9 +92,47 @@ void AsteroidHandler::starSpwan()
 
 bool AsteroidHandler::remove(int index)
 {
-	return false;
+	if (index < nrOfAstroids)
+	{
+		if (dynamic_cast<BigAsteroid*> (asterods[index]))
+		{
+			for (int i = 0; i < 2; i++)
+				addMedium(asterods[index]->getPos());
+		}
+		else if (dynamic_cast<MediumAsteroid*> (asterods[index]))
+		{
+			for (int i = 0; i < 2; i++)
+				addSmall(asterods[index]->getPos());
+		}
+		delete asterods[index];
+		asterods[index] = asterods[nrOfAstroids - 1];
+		asterods[nrOfAstroids - 1] = nullptr;
+		nrOfAstroids--;
+	}
+	return index < nrOfAstroids;
+}
+
+void AsteroidHandler::addMedium(sf::Vector2f pos)
+{
+	if (nrOfAstroids == capacity)
+		expand();
+
+	asterods[nrOfAstroids] = new MediumAsteroid(pos);
+	nrOfAstroids++;
+}
+
+void AsteroidHandler::addSmall(sf::Vector2f pos)
+{
+	if (nrOfAstroids == capacity)
+		expand();
+
+	asterods[nrOfAstroids] = new SmallAsteroid(pos);
+	nrOfAstroids++;
 }
 
 void AsteroidHandler::update(float dt)
 {
+	starSpwan();
+	for (int i = 0; i < nrOfAstroids; i++)
+		asterods[i]->Update(dt);
 }

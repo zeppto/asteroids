@@ -4,6 +4,9 @@
 #include <SFML\Graphics.hpp>
 #include "Player.hpp"
 #include "Asteroid.hpp"
+#include "BigAsteroid.h"
+#include "MediumAsteroid.h"
+#include "AsteroidHandler.h"
 
 class Game : public sf::Drawable
 {
@@ -16,7 +19,7 @@ private:
 	sf::Texture mBackgroundTex;
 	sf::Sprite mBackgroundSprite;
 	Player mPlayer;
-	Asteroid mTempAstroids[10];
+	AsteroidHandler astroidHandler;
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
