@@ -14,11 +14,9 @@ public:
 
 	void movement(float dt);
 	void shoot(float dt);
-	void die();
 	//borde göra att det finns en player bullet handeler som tar hand om spelarens bullets så detta inte behövs
 	int getNrOfBullets() const;
 	bool getBulletCollision(int index, sf::Sprite collider);
-	bool getPlayerCollision(sf::Sprite collider);
 private:
 	sf::Texture mTexture;
 	sf::Sprite mSpriteSheet;

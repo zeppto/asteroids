@@ -5,8 +5,6 @@ void Entity::draw(sf::RenderTarget & target, sf::RenderStates states) const
 }
 Entity::Entity()
 {
-	originX = 20;
-	originY = 20;
 }
 
 void Entity::update(float dt, sf::Sprite & mSpriteSheet)
@@ -15,14 +13,14 @@ void Entity::update(float dt, sf::Sprite & mSpriteSheet)
 
 void Entity::edgeOfScreen(sf::Sprite & mSpriteSheet)
 {
-	if (mSpriteSheet.getPosition().x < -originX)
-		mSpriteSheet.setPosition(1600.0f + originX, mSpriteSheet.getPosition().y);
-	if (mSpriteSheet.getPosition().x > 1600.0f + originX)
-		mSpriteSheet.setPosition(-originX, mSpriteSheet.getPosition().y);
-	if (mSpriteSheet.getPosition().y < -originY)
-		mSpriteSheet.setPosition(mSpriteSheet.getPosition().x, 900.0f + originY);
-	if (mSpriteSheet.getPosition().y > 900.0f + originY)
-		mSpriteSheet.setPosition(mSpriteSheet.getPosition().x, -originY);
+	if (mSpriteSheet.getPosition().x < -20.0f)
+		mSpriteSheet.setPosition(1620.0f, mSpriteSheet.getPosition().y);
+	if (mSpriteSheet.getPosition().x > 1620.0f)
+		mSpriteSheet.setPosition(-20.0f, mSpriteSheet.getPosition().y);
+	if (mSpriteSheet.getPosition().y < -20.0f)
+		mSpriteSheet.setPosition(mSpriteSheet.getPosition().x, 920.0f);
+	if (mSpriteSheet.getPosition().y > 920.0f)
+		mSpriteSheet.setPosition(mSpriteSheet.getPosition().x, -20.0f);
 }
 
 sf::Vector2f Entity::getDirection() const
@@ -33,16 +31,6 @@ sf::Vector2f Entity::getDirection() const
 float Entity::getSpeed() const
 {
 	return speed;
-}
-
-float Entity::getOriginX() const
-{
-	return originX;
-}
-
-float Entity::getOriginY() const
-{
-	return originY;
 }
 
 void Entity::setDirection(sf::Vector2f direction)
@@ -63,14 +51,4 @@ void Entity::setDirectionY(float y)
 void Entity::setSpeed(float speed)
 {
 	this->speed = speed;
-}
-
-void Entity::setOriginX(float originX)
-{
-	this->originX = originX;
-}
-
-void Entity::setOriginY(float originY)
-{
-	this->originY = originY;
 }

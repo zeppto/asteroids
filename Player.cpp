@@ -40,11 +40,11 @@ void Player::movement(float dt)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		mSpriteSheet.rotate(0.2f);
+		mSpriteSheet.rotate(0.2);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		mSpriteSheet.rotate(-0.2f);
+		mSpriteSheet.rotate(-0.2);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -80,18 +80,6 @@ void Player::shoot(float dt)
 	bulletTimer += 100*dt;
 }
 
-void Player::die()
-{
-	//starta dödss animation
-	//vänta tills den är över
-	//restarta spelaren(plasera den i mitten med ett mindre liv eller dör och spelet är slut)
-	//game over skreen när spelaren inte har mer liv(vill bara ha ett liv så direckt game over skren)
-	//temp om spelaren dör respawn i mitten
-	mSpriteSheet.setPosition(750, 450);
-	mAcc = sf::Vector2f(0, 0);
-	mSpriteSheet.setRotation(270);
-}
-
 int Player::getNrOfBullets() const
 {
 	return bulletHandeler.getNrOfBullets();
@@ -100,11 +88,6 @@ int Player::getNrOfBullets() const
 bool Player::getBulletCollision(int index, sf::Sprite collider)
 {
 	return bulletHandeler.getABulletCollision(index, collider);
-}
-
-bool Player::getPlayerCollision(sf::Sprite collider)
-{
-	return mSpriteSheet.getGlobalBounds().intersects(collider.getGlobalBounds());
 }
 
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const

@@ -1,5 +1,4 @@
 #ifndef BULLETHANDELER_H
-#define BULLETHANDELER_H
 #include "Bullet.h"
 
 class BulletHandler : public sf::Drawable

@@ -15,7 +15,6 @@ public:
 
 	void setScale(sf::Vector2f scale);
 	void setPos(float x, float y);
-	void setSprite(sf::String fileName, sf::IntRect sheetRecr, int originX, int originY);
 private:
 	sf::Texture mTexture;
 	sf::Sprite mSpriteSheet;
