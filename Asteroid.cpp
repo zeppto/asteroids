@@ -2,19 +2,6 @@
 
 Asteroid::Asteroid()
 {
-	sf::String fileName = "../Resources/astroid.png";
-
-	if (!mTexture.loadFromFile(fileName))
-	{
-		std::cout << "ERROR: Player image could not be loaded.\n---" << std::endl;
-	}
-	else
-	{
-		mSpriteSheet.setTexture(mTexture);
-	}
-	mSpriteSheet.setTextureRect(sf::IntRect(0, 0, 40, 40));
-	mSpriteSheet.setOrigin(20, 20);
-
 	setDirectionX(rand() % 200 - 100);
 	setDirectionY(rand() % 200 - 100);
 	//bra för temp textur   
@@ -24,13 +11,27 @@ Asteroid::Asteroid()
 void Asteroid::Update(float dt)
 {
 	mSpriteSheet.move(getDirection() * dt);
-	mSpriteSheet.rotate(0.01f);
+	//mSpriteSheet.rotate(0.01f);
 	edgeOfScreen(mSpriteSheet);
 }
 
 sf::Vector2f Asteroid::getPos() const
 {
 	return mSpriteSheet.getPosition();
+}
+
+void Asteroid::setSprite(sf::String fileName, sf::IntRect sheetRecr, int originX, int originY)
+{
+	if (!mTexture.loadFromFile(fileName))
+	{
+		std::cout << "Error! image could not be loaded!.." << std::endl;
+	}
+	else
+	{
+		mSpriteSheet.setTexture(mTexture);
+	}
+	mSpriteSheet.setTextureRect(sheetRecr);
+	mSpriteSheet.setOrigin(originX, originY);
 }
 
 void Asteroid::draw(sf::RenderTarget & target, sf::RenderStates states) const

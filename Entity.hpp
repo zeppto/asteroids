@@ -7,7 +7,9 @@ class Entity : public sf::Drawable
 {
 private:
 	sf::Vector2f direction;
-	float speed = 0.5f;
+	float speed = 0.5f,
+		originX,
+		originY;
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 public:
@@ -18,11 +20,15 @@ public:
 
 	sf::Vector2f getDirection() const;
 	float getSpeed() const;
+	float getOriginX() const;
+	float getOriginY() const;
 
 	void setDirection(sf::Vector2f direction);
 	void setDirectionX(float x);
 	void setDirectionY(float y);
 	void setSpeed(float speed);
+	void setOriginX(float originX);
+	void setOriginY(float originY);
 };
 
 
