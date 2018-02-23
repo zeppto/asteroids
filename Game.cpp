@@ -18,6 +18,7 @@ void Game::Update(float dt)
 	tempAlien.Update(dt);
 	mPlayer.Update(dt);
 	astroidHandler.update(dt);
+
 	for (int i = 0; i < mPlayer.getNrOfBullets(); i++)
 		for (int j = 0; j < astroidHandler.getNrOfAsteroid(); j++)
  			if (mPlayer.getBulletCollision(i, astroidHandler.getASprite(j)))
@@ -26,11 +27,15 @@ void Game::Update(float dt)
 				std::cout << "i think it workt" << std::endl;
 				astroidHandler.remove(j);
 			}
+
 	for (int i = 0; i < astroidHandler.getNrOfAsteroid(); i++)
 		if (mPlayer.getPlayerCollision(astroidHandler.getASprite(i)))
 		{
 			mPlayer.die();
 		}
+
+	//alien bullet calulation
+	tempAlien.setPlayerPosRefrens(mPlayer.getPos());
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const

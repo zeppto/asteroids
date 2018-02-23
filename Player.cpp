@@ -92,6 +92,11 @@ void Player::die()
 	mSpriteSheet.setRotation(270);
 }
 
+sf::Vector2f Player::getPos() const
+{
+	return mSpriteSheet.getPosition();
+}
+
 int Player::getNrOfBullets() const
 {
 	return bulletHandeler.getNrOfBullets();

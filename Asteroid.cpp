@@ -11,7 +11,7 @@ Asteroid::Asteroid()
 void Asteroid::Update(float dt)
 {
 	mSpriteSheet.move(getDirection() * dt);
-	//mSpriteSheet.rotate(0.01f);
+	mSpriteSheet.rotate(0.01f);
 	edgeOfScreen(mSpriteSheet);
 }
 

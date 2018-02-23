@@ -64,12 +64,12 @@ int BulletHandler::getNrOfBullets() const
 	return nrOfBullets;
 }
 
-void BulletHandler::add(sf::Vector2f direction, sf::Vector2f position, float rotation)
+void BulletHandler::add(sf::Vector2f direction, sf::Vector2f position, float rotation, float speed)
 {
 	if (capacity == nrOfBullets)
 		expand();
 
-	bullets[nrOfBullets] = new Bullet(direction, position, rotation);
+	bullets[nrOfBullets] = new Bullet(direction, position, rotation, speed);
 	nrOfBullets++;
 }
 
