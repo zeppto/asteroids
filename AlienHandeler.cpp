@@ -49,7 +49,7 @@ void AlienHandeler::alienSpwaner()
 	}
 	if (alienSpwanTimer < 0)
 	{
-		alienSpwanTimer = rand() % 5000 + 5000;
+		alienSpwanTimer = rand() % 10000 + 5000;
 		aAlien = new Alien();
 	}
 }

@@ -34,6 +34,11 @@ void Asteroid::setSprite(sf::String fileName, sf::IntRect sheetRecr, int originX
 	mSpriteSheet.setOrigin(originX, originY);
 }
 
+bool Asteroid::getAstroidCollition(sf::Sprite collider)
+{
+	return mSpriteSheet.getGlobalBounds().intersects(collider.getGlobalBounds());
+}
+
 void Asteroid::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(mSpriteSheet, states);

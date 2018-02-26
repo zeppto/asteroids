@@ -20,10 +20,11 @@ Player::Player(int playerNumber)
 	}
 	setDirection(sf::Vector2f(0.0f, 0.0f));
 	mSpriteSheet.setTextureRect(sf::IntRect(0, 0, 40, 40));
-	mSpriteSheet.setPosition(500, 500);
 	mSpriteSheet.setOrigin(20, 20);
 	mAcc = sf::Vector2f(0.0f, 0.0f);
 	bulletTimer = 0;
+	mSpriteSheet.setPosition(750, 450);
+	mSpriteSheet.setRotation(270);
 }
 
 void Player::Update(float dt)

@@ -30,10 +30,14 @@ Alien::Alien()
 		y;
 	do
 	{
-		x = rand() % (1600 + 110) - 55;
- 		y = rand() % (900 + 110) - 55;
-	} while ((x < 1600 + getOriginX() && x > -getOriginX()) && (y < 900 + getOriginY() && y > -getOriginY()));
-	spriteSheet.setPosition(rand() % (1600 + 110) - 55, rand() % (900 + 110) - 55);
+ 		y = rand() % (900 + 210) - 100;
+  	} while (y < 900 + getOriginY() && y > -getOriginY());
+	do
+	{
+		x = rand() % (1600 + 210) - 100;
+	} while (x < 1600 + getOriginX() && x > -getOriginX());
+
+ 	spriteSheet.setPosition(x, y);
 	setSpeed(2);
 	shootTimer = 0;
 }
