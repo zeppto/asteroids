@@ -6,7 +6,7 @@
 #include "BigAsteroid.h"
 #include "MediumAsteroid.h"
 #include "AsteroidHandler.h"
-#include "Alien.hpp"
+#include "AlienHandeler.h"
 
 class Game : public sf::Drawable
 {
@@ -19,8 +19,11 @@ private:
 	sf::Texture mBackgroundTex;
 	sf::Sprite mBackgroundSprite;
 	Player mPlayer;
-	Alien tempAlien;
+	AlienHandeler alienHandler;
 	AsteroidHandler astroidHandler;
+	sf::Text text;
+	sf::Font font;
+	int score;
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };

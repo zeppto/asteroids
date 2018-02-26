@@ -20,8 +20,10 @@ public:
 	Alien();
 
 	void setPlayerPosRefrens(sf::Vector2f playerPos);
+	sf::Sprite getSprite() const;
+	bool getABulletCollision(int index, sf::Sprite collider);
+	int Alien::getNrOfBullets() const;
 
-	
 	void Update(float dt);
 };
 

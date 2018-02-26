@@ -112,6 +112,11 @@ bool Player::getPlayerCollision(sf::Sprite collider)
 	return mSpriteSheet.getGlobalBounds().intersects(collider.getGlobalBounds());
 }
 
+sf::Sprite Player::getSprite()
+{
+	return mSpriteSheet;
+}
+
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
 	target.draw(bulletHandeler, states);

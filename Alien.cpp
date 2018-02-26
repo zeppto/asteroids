@@ -1,5 +1,7 @@
 #include "Alien.hpp"
 
+const float rad2deg = (180.0f / 3.14159f);
+
 void Alien::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(spriteSheet, states);
@@ -29,16 +31,31 @@ Alien::Alien()
 	do
 	{
 		x = rand() % (1600 + 110) - 55;
-		y = rand() % (900 + 110) - 55;
-	} while ((x > 1600 + getOriginX() || x < -getOriginX()) && y > 900 + getOriginY() || y < -getOriginY());
+ 		y = rand() % (900 + 110) - 55;
+	} while ((x < 1600 + getOriginX() && x > -getOriginX()) && (y < 900 + getOriginY() && y > -getOriginY()));
 	spriteSheet.setPosition(rand() % (1600 + 110) - 55, rand() % (900 + 110) - 55);
-	setSpeed(3);
+	setSpeed(2);
 	shootTimer = 0;
 }
 
 void Alien::setPlayerPosRefrens(sf::Vector2f playerPos)
 {
 	playerPosRefrens = playerPos;
+}
+
+sf::Sprite Alien::getSprite() const
+{
+	return spriteSheet;
+}
+
+bool Alien::getABulletCollision(int index, sf::Sprite collider)
+{
+	return bulletHandeler.getABulletCollision(index, collider);
+}
+
+int Alien::getNrOfBullets() const
+{
+	return bulletHandeler.getNrOfBullets();
 }
 
 void Alien::Update(float dt)
@@ -55,8 +72,10 @@ void Alien::Update(float dt)
 		else
 			bulletDirection = sf::Vector2f(0,0);
 
-		//temp rotation
-		bulletHandeler.add(bulletDirection, spriteSheet.getPosition(), spriteSheet.getRotation());
+		//funkar ibland och inte ibland 
+		bulletRotation = asin(bulletDirection.y) * rad2deg;
+
+		bulletHandeler.add(bulletDirection, spriteSheet.getPosition(), bulletRotation);
 		shootTimer = 0;
 	}
 	shootTimer++;

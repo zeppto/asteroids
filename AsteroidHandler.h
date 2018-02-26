@@ -3,11 +3,13 @@
 #include "BigAsteroid.h"
 #include "MediumAsteroid.h"
 #include "SmallAsteroid.h"
+#include "Alien.hpp"
 
 class AsteroidHandler : public sf::Drawable
 {
 private:
 	Asteroid * * asterods;
+
 	int nrOfAstroids,
 		capacity,
 		nrToSpwan;

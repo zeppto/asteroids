@@ -20,6 +20,7 @@ public:
 	int getNrOfBullets() const;
 	bool getBulletCollision(int index, sf::Sprite collider);
 	bool getPlayerCollision(sf::Sprite collider);
+	sf::Sprite getSprite();
 private:
 	sf::Texture mTexture;
 	sf::Sprite mSpriteSheet;
