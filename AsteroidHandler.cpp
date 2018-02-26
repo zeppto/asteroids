@@ -74,6 +74,16 @@ sf::Sprite AsteroidHandler::getASprite(int index) const
 	return asterods[index]->getSprite();
 }
 
+bool AsteroidHandler::getAAstroidCollition(int index, sf::Sprite collider)
+{
+	return asterods[index]->getAstroidCollition(collider);
+}
+
+void AsteroidHandler::setPlayerSpritRef(sf::Sprite playerSprite)
+{
+	this->playerRefrens = playerSprite;
+}
+
 void AsteroidHandler::starSpwan()
 {
 	if (nrOfAstroids == 0)
@@ -84,6 +94,10 @@ void AsteroidHandler::starSpwan()
 		for (int i = 0; i < nrToSpwan; i++)
 		{
 			asterods[i] = new BigAsteroid();
+			while (asterods[i]->getAstroidCollition(playerRefrens))
+			{
+				asterods[i]->setPos(rand() % 1600, rand() % 900);
+			}
 			nrOfAstroids++;
 		}
 	}

@@ -16,6 +16,8 @@ public:
 	void setScale(sf::Vector2f scale);
 	void setPos(float x, float y);
 	void setSprite(sf::String fileName, sf::IntRect sheetRecr, int originX, int originY);
+
+	bool getAstroidCollition(sf::Sprite collider);
 private:
 	sf::Texture mTexture;
 	sf::Sprite mSpriteSheet;

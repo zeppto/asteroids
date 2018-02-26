@@ -20,10 +20,11 @@ Player::Player(int playerNumber)
 	}
 	setDirection(sf::Vector2f(0.0f, 0.0f));
 	mSpriteSheet.setTextureRect(sf::IntRect(0, 0, 40, 40));
-	mSpriteSheet.setPosition(500, 500);
 	mSpriteSheet.setOrigin(20, 20);
 	mAcc = sf::Vector2f(0.0f, 0.0f);
 	bulletTimer = 0;
+	mSpriteSheet.setPosition(750, 450);
+	mSpriteSheet.setRotation(270);
 }
 
 void Player::Update(float dt)
@@ -92,6 +93,11 @@ void Player::die()
 	mSpriteSheet.setRotation(270);
 }
 
+sf::Vector2f Player::getPos() const
+{
+	return mSpriteSheet.getPosition();
+}
+
 int Player::getNrOfBullets() const
 {
 	return bulletHandeler.getNrOfBullets();
@@ -105,6 +111,11 @@ bool Player::getBulletCollision(int index, sf::Sprite collider)
 bool Player::getPlayerCollision(sf::Sprite collider)
 {
 	return mSpriteSheet.getGlobalBounds().intersects(collider.getGlobalBounds());
+}
+
+sf::Sprite Player::getSprite()
+{
+	return mSpriteSheet;
 }
 
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const

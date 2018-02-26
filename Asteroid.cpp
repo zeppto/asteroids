@@ -11,7 +11,7 @@ Asteroid::Asteroid()
 void Asteroid::Update(float dt)
 {
 	mSpriteSheet.move(getDirection() * dt);
-	//mSpriteSheet.rotate(0.01f);
+	mSpriteSheet.rotate(0.01f);
 	edgeOfScreen(mSpriteSheet);
 }
 
@@ -32,6 +32,11 @@ void Asteroid::setSprite(sf::String fileName, sf::IntRect sheetRecr, int originX
 	}
 	mSpriteSheet.setTextureRect(sheetRecr);
 	mSpriteSheet.setOrigin(originX, originY);
+}
+
+bool Asteroid::getAstroidCollition(sf::Sprite collider)
+{
+	return mSpriteSheet.getGlobalBounds().intersects(collider.getGlobalBounds());
 }
 
 void Asteroid::draw(sf::RenderTarget & target, sf::RenderStates states) const

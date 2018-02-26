@@ -19,7 +19,7 @@ public:
 
 	int getNrOfBullets() const;
 
-	void add(sf::Vector2f direction, sf::Vector2f position, float rotation);
+	void add(sf::Vector2f direction, sf::Vector2f position, float rotation, float speed = 500);
 	bool remove(int index);
 	void bulletLife();
 	bool getABulletCollision(int index, sf::Sprite collider);

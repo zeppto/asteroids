@@ -16,9 +16,11 @@ public:
 	void shoot(float dt);
 	void die();
 	//borde göra att det finns en player bullet handeler som tar hand om spelarens bullets så detta inte behövs
+	sf::Vector2f getPos() const;
 	int getNrOfBullets() const;
 	bool getBulletCollision(int index, sf::Sprite collider);
 	bool getPlayerCollision(sf::Sprite collider);
+	sf::Sprite getSprite();
 private:
 	sf::Texture mTexture;
 	sf::Sprite mSpriteSheet;
