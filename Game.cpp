@@ -3,7 +3,8 @@
 
 Game::Game() :mPlayer(1)
 {
-	thisGameState = startMenue;
+	//thisGameState = startMenue;
+	thisGameState = gameOver;
 
 	if (!mBackgroundTex.loadFromFile("../Resources/background1.png"))
 	{
@@ -23,19 +24,38 @@ Game::Game() :mPlayer(1)
 	score = 0; 
 
 	//menue stuff
-	if (thisGameState == startMenue)
-	{
-		menyWelcome.setFont(font);
-		menyWelcome.setString("Astroides");
-		menyWelcome.setCharacterSize(100);
-		menyWelcome.setColor(sf::Color::White);
-		menyWelcome.setPosition(sf::Vector2f(550, 110));
+	menyWelcome.setFont(font);
+	menyWelcome.setString("Astroides");
+	menyWelcome.setCharacterSize(100);
+	menyWelcome.setColor(sf::Color::White);
+	menyWelcome.setPosition(sf::Vector2f(550, 110));
 
-		startButton.setFont(font);
-		startButton.setString("Press enter to start");
-		startButton.setCharacterSize(50);
-		startButton.setColor(sf::Color::White);
-		startButton.setPosition(sf::Vector2f(530, 310));
+	startButton.setFont(font);
+	startButton.setString("Press enter to start");
+	startButton.setCharacterSize(50);
+	startButton.setColor(sf::Color::White);
+	startButton.setPosition(sf::Vector2f(530, 310));
+
+	//gameOver stuff
+	gameOverText.setFont(font);
+	gameOverText.setString("GAME OVER");
+	gameOverText.setCharacterSize(100);
+	gameOverText.setColor(sf::Color::White);
+	gameOverText.setPosition(sf::Vector2f(550, 110));
+
+	enterNameText.setFont(font);
+	enterNameText.setString("enter name:");
+	enterNameText.setCharacterSize(50);
+	enterNameText.setColor(sf::Color::White);
+	enterNameText.setPosition(sf::Vector2f(530, 310));
+
+	for (int i = 0; i < 5; i++)
+	{
+		nameCharEnterd[i].setFont(font);
+		nameCharEnterd[i].setString("H");
+		nameCharEnterd[i].setCharacterSize(50);
+		nameCharEnterd[i].setColor(sf::Color::White);
+		nameCharEnterd[i].setPosition(sf::Vector2f(530, 320 + (i*10)));
 	}
 }
 
@@ -111,6 +131,11 @@ void Game::Update(float dt)
 		//alien bullet calulation
 		alienHandler.setAlienPlayerPosRefrens(mPlayer.getPos());
 	}
+	//gameOver stuff
+	if (thisGameState == gameOver)
+	{
+
+	}
 }
 
 void Game::addPoints(int points)
@@ -119,6 +144,17 @@ void Game::addPoints(int points)
 	std::stringstream ss;
 	ss << score;
 	scoreCounter.setString(ss.str());
+}
+
+void Game::enterPlayerName(char enterd)
+{
+	enterdCaracters[0] = enterd;
+	enterNameText.setString(enterd);
+}
+
+bool Game::isGameOverState()
+{
+	return thisGameState == gameOver;
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -136,5 +172,13 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	{
 		target.draw(menyWelcome, states);
 		target.draw(startButton, states);
+	}
+	//gameOver stuff
+	if (thisGameState == gameOver)
+	{
+		target.draw(gameOverText, states);
+		target.draw(enterNameText, states);
+		for(int i = 0; i < 5; i++)
+			target.draw(nameCharEnterd[i], states);
 	}
 }

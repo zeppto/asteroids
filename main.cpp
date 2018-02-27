@@ -15,6 +15,12 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+			if (event.type == sf::Event::TextEntered)
+			{
+				if (game.isGameOverState() && event.text.unicode >= 33 && event.text.unicode <= 122)
+					game.enterPlayerName((char)event.text.unicode);
+				//std::cout << (char)event.text.unicode;
+			}
 		}
 
 		// Update()

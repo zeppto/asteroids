@@ -16,10 +16,12 @@ public:
 
 	void Update(float dt);
 	void addPoints(int points);
+	void enterPlayerName(char enterd);
+	bool isGameOverState();
 
 private:
 	//vet inte var man sätter enums -_-
-	enum gameState { startMenue, game, gameOver };
+	enum gameState { startMenue, game, gameOver, highScoreBord };
 	sf::Texture mBackgroundTex;
 	sf::Sprite mBackgroundSprite;
 	Player mPlayer;
@@ -27,10 +29,15 @@ private:
 	AsteroidHandler astroidHandler;
 	sf::Text scoreCounter,
 		menyWelcome,
-		startButton;
+		startButton,
+		gameOverText,
+		enterNameText,
+		nameCharEnterd[5];
 	sf::Font font;
 	int score;
 	gameState thisGameState;
+	std::string playerName;
+	char enterdCaracters[5] = { ' ' };
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };
