@@ -3,11 +3,8 @@
 
 #include <SFML\Graphics.hpp>
 #include "Player.hpp"
-#include "BigAsteroid.h"
-#include "MediumAsteroid.h"
 #include "AsteroidHandler.h"
 #include "AlienHandeler.h"
-#include "highScore.h"
 #include <sstream>
 #include "BaseState.h"
 
@@ -16,35 +13,20 @@ class Game : public BaseState
 public:
 	Game();
 
-	void update(float dt);
+	BaseState* update(float dt);
 	void addPoints(int points);
-	void enterPlayerName(char enterd);
-	bool isGameOverState();
-	void reset();
-
+	void handelEvent(sf::Event event);
 private:
-	//vet inte var man sätter enums -_-
-	enum gameState { startMenue, game, gameOver, highScoreBord };
 	sf::Texture mBackgroundTex;
 	sf::Sprite mBackgroundSprite;
 	Player mPlayer;
 	AlienHandeler alienHandler;
 	AsteroidHandler astroidHandler;
-	HighScore theHighScore;
-	sf::Text scoreCounter,
-		menyWelcome,
-		startButton,
-		gameOverText,
-		enterNameText,
-		nameEnterd,
-		scores,
-		playerNamesScore,
-		scoreBord,
-		youreScore;
+	sf::Text scoreCounter;
 	sf::Font font;
 	int score;
-	gameState thisGameState;
 	std::string playerName;
+	BaseState* returnToUpdate;
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };

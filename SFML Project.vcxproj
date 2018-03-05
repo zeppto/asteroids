@@ -171,10 +171,12 @@
     <ClCompile Include="BulletHandler.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="highScore.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MediumAsteroid.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="SmallAsteroid.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,9 +190,11 @@
     <ClInclude Include="BulletHandler.h" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="Game.hpp" />
-    <ClInclude Include="highScore.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="MediumAsteroid.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.hpp" />
+    <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="SmallAsteroid.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
