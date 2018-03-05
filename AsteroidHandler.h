@@ -34,6 +34,7 @@ public:
 	bool remove(int index);
 	void addMedium(sf::Vector2f pos);
 	void addSmall(sf::Vector2f pos);
+	void resetNrToSpwan();
 
 	void update(float dt);
 };

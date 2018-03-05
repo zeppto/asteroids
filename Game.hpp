@@ -7,17 +7,20 @@
 #include "MediumAsteroid.h"
 #include "AsteroidHandler.h"
 #include "AlienHandeler.h"
+#include "highScore.h"
 #include <sstream>
+#include "BaseState.h"
 
-class Game : public sf::Drawable
+class Game : public BaseState
 {
 public:
 	Game();
 
-	void Update(float dt);
+	void update(float dt);
 	void addPoints(int points);
 	void enterPlayerName(char enterd);
 	bool isGameOverState();
+	void reset();
 
 private:
 	//vet inte var man sätter enums -_-
@@ -27,17 +30,21 @@ private:
 	Player mPlayer;
 	AlienHandeler alienHandler;
 	AsteroidHandler astroidHandler;
+	HighScore theHighScore;
 	sf::Text scoreCounter,
 		menyWelcome,
 		startButton,
 		gameOverText,
 		enterNameText,
-		nameCharEnterd[5];
+		nameEnterd,
+		scores,
+		playerNamesScore,
+		scoreBord,
+		youreScore;
 	sf::Font font;
 	int score;
 	gameState thisGameState;
 	std::string playerName;
-	char enterdCaracters[5] = { ' ' };
 
 	void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 };

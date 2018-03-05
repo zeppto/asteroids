@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 
 const int nrOfTopScores= 10;
 
@@ -19,7 +20,8 @@ public:
 	void readFromFile();
 	void writeToFile(int score, std::string name);
 	void sortInNewScore( int score, std::string name);
-	std::string toString() const;
+	std::string scoreToString() const;
+	std::string nameToString() const;
 
 };
 

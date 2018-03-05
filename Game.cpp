@@ -3,8 +3,8 @@
 
 Game::Game() :mPlayer(1)
 {
-	//thisGameState = startMenue;
-	thisGameState = gameOver;
+	thisGameState = startMenue;
+	//thisGameState = gameOver;
 
 	if (!mBackgroundTex.loadFromFile("../Resources/background1.png"))
 	{
@@ -49,17 +49,40 @@ Game::Game() :mPlayer(1)
 	enterNameText.setColor(sf::Color::White);
 	enterNameText.setPosition(sf::Vector2f(530, 310));
 
-	for (int i = 0; i < 5; i++)
-	{
-		nameCharEnterd[i].setFont(font);
-		nameCharEnterd[i].setString("H");
-		nameCharEnterd[i].setCharacterSize(50);
-		nameCharEnterd[i].setColor(sf::Color::White);
-		nameCharEnterd[i].setPosition(sf::Vector2f(530, 320 + (i*10)));
-	}
+	nameEnterd.setFont(font);
+	nameEnterd.setString("");
+	nameEnterd.setCharacterSize(50);
+	nameEnterd.setColor(sf::Color::White);
+	nameEnterd.setPosition(sf::Vector2f(830, 310));
+
+	//scorebord stuff
+	scores.setFont(font);
+	scores.setString("");
+	scores.setCharacterSize(50);
+	scores.setColor(sf::Color::White);
+	scores.setPosition(sf::Vector2f(330, 210));
+
+	playerNamesScore.setFont(font);
+	playerNamesScore.setString("");
+	playerNamesScore.setCharacterSize(50);
+	playerNamesScore.setColor(sf::Color::White);
+	playerNamesScore.setPosition(sf::Vector2f(1030, 210));
+
+	youreScore.setFont(font);
+	youreScore.setString("");
+	youreScore.setCharacterSize(50);
+	youreScore.setColor(sf::Color::White);
+	youreScore.setPosition(sf::Vector2f(330, 810));
+
+	scoreBord.setFont(font);
+	scoreBord.setString("High Score");
+	scoreBord.setCharacterSize(90);
+	scoreBord.setColor(sf::Color::White);
+	scoreBord.setPosition(sf::Vector2f(530, 50));
+
 }
 
-void Game::Update(float dt)
+void Game::update(float dt)
 {
 	srand(time(NULL));
 
@@ -94,6 +117,7 @@ void Game::Update(float dt)
 			{
 				//game over
 				mPlayer.die();
+				thisGameState = gameOver;
 			}
 		if (alienHandler.alienExist())
 		{
@@ -102,12 +126,14 @@ void Game::Update(float dt)
 				if (alienHandler.getABulletCollision(i, mPlayer.getSprite()))
 				{
 					mPlayer.die();
+					thisGameState = gameOver;
 				}
 			}
 			if (mPlayer.getPlayerCollision(alienHandler.getSprite()))
 			{
 				//game over
 				mPlayer.die();
+				thisGameState = gameOver;
 			}
 			for (int i = 0; i < mPlayer.getNrOfBullets(); i++)
 				if (mPlayer.getBulletCollision(i, alienHandler.getSprite()))
@@ -134,7 +160,19 @@ void Game::Update(float dt)
 	//gameOver stuff
 	if (thisGameState == gameOver)
 	{
+	}
 
+	//highScoreBord stuff
+	if (thisGameState == highScoreBord)
+	{
+
+		/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+		{
+			thisGameState = startMenue;
+			astroidHandler.resetNrToSpwan();
+			score = 0;
+			playerNamesScore.setString("");
+		}*/
 	}
 }
 
@@ -148,13 +186,33 @@ void Game::addPoints(int points)
 
 void Game::enterPlayerName(char enterd)
 {
-	enterdCaracters[0] = enterd;
-	enterNameText.setString(enterd);
+	static std::string EnterdCaracter;
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::BackSpace))	
+		//kan sabas om du tar bort caraktärer somm inte finns
+		EnterdCaracter.pop_back();
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+	{
+		thisGameState = highScoreBord;
+		EnterdCaracter += "/n";
+		theHighScore.writeToFile(score, nameEnterd.getString());
+		playerNamesScore.setString(theHighScore.nameToString());
+		scores.setString(theHighScore.scoreToString());
+		youreScore.setString("Youre score: " + std::to_string(score));
+	}
+	else
+		EnterdCaracter += enterd;
+
+	nameEnterd.setString(EnterdCaracter);
 }
 
 bool Game::isGameOverState()
 {
 	return thisGameState == gameOver;
+}
+
+void Game::reset()
+{
 }
 
 void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -178,7 +236,14 @@ void Game::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	{
 		target.draw(gameOverText, states);
 		target.draw(enterNameText, states);
-		for(int i = 0; i < 5; i++)
-			target.draw(nameCharEnterd[i], states);
+		target.draw(nameEnterd, states);
+	}
+
+	if (thisGameState == highScoreBord)
+	{
+		target.draw(scores, states);
+		target.draw(scoreBord, states);
+		target.draw(playerNamesScore, states);
+		target.draw(youreScore, states);
 	}
 }

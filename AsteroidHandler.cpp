@@ -144,6 +144,11 @@ void AsteroidHandler::addSmall(sf::Vector2f pos)
 	nrOfAstroids++;
 }
 
+void AsteroidHandler::resetNrToSpwan()
+{
+	nrToSpwan = 3;
+}
+
 void AsteroidHandler::update(float dt)
 {
 	starSpwan();

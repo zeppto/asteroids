@@ -182,6 +182,7 @@
     <ClInclude Include="AlienHandeler.h" />
     <ClInclude Include="Asteroid.hpp" />
     <ClInclude Include="AsteroidHandler.h" />
+    <ClInclude Include="BaseState.h" />
     <ClInclude Include="BigAsteroid.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletHandler.h" />

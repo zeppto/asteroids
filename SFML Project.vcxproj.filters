@@ -98,5 +98,8 @@
     <ClInclude Include="highScore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

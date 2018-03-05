@@ -1,18 +1,26 @@
 #include "highScore.h"
 
+HighScore::HighScore()
+{
+	nrOfHighScores = 0;
+}
+
 void HighScore::readFromFile()
 {
 	std::ifstream fromFile;
 	fromFile.open("highScores");
 
-	for (int i = 0; i < nrOfTopScores; i++)
+	for (int i = 0; i < nrOfTopScores + 2; i++)
 	{
-		fromFile >> topNames[i];
-		fromFile >> topScores[i];
 		if (fromFile.eof())                  // check for End Of File
 		{
-			nrOfHighScores = i + 1;
-			i = nrOfTopScores;
+			nrOfHighScores = i - 1;
+			i = nrOfTopScores + 2;
+		}
+		else
+		{
+			fromFile >> topNames[i];
+			fromFile >> topScores[i];
 		}
 	}
 	fromFile.close();
@@ -25,8 +33,9 @@ void HighScore::readFromFile()
 void HighScore::writeToFile(int score, std::string name)
 {
 	readFromFile();
-
-	if (score >= topScores[nrOfHighScores - 1] || nrOfHighScores < nrOfTopScores)
+	if(nrOfHighScores == 0)
+		sortInNewScore(score, name);
+	else if (score >= topScores[nrOfHighScores - 1] || nrOfHighScores < nrOfTopScores)
 	{
 		sortInNewScore(score, name);
 	}
@@ -70,8 +79,19 @@ void HighScore::sortInNewScore(int score, std::string name)
 	}
 }
 
-std::string HighScore::toString() const
+std::string HighScore::scoreToString() const
 {
-	return std::string();
+	std::stringstream ss;
+	for (int i = 0; i < nrOfHighScores; i++)
+		ss << topScores[i] << std::endl;
+	return ss.str();
+}
+
+std::string HighScore::nameToString() const
+{
+	std::string returnString;
+	for (int i = 0; i < nrOfHighScores; i++)
+		returnString += topNames[i] + "\n";
+	return returnString;
 }
 

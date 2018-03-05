@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Game.hpp"
+#include "BaseState.h"
 
 int main()
 {
@@ -7,6 +8,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1600, 900), "Asteroid");
 	Game game;
 	sf::Clock gameTime;
+	BaseState* currentState = new Game();
 
 	while (window.isOpen())
 	{
@@ -17,18 +19,20 @@ int main()
 				window.close();
 			if (event.type == sf::Event::TextEntered)
 			{
-				if (game.isGameOverState() && event.text.unicode >= 33 && event.text.unicode <= 122)
+				if (game.isGameOverState() && ((event.text.unicode >= 33 && event.text.unicode <= 122)
+					||event.text.unicode == 8 || event.text.unicode == 13))
 					game.enterPlayerName((char)event.text.unicode);
-				//std::cout << (char)event.text.unicode;
 			}
 		}
 
 		// Update()
-		game.Update(gameTime.restart().asSeconds());
+		currentState->update(gameTime.restart().asSeconds());
+		//game.Update(gameTime.restart().asSeconds());
 
 		// Draw()
 		window.clear();
-		window.draw(game);
+		window.draw(*currentState);
+		//window.draw(game);
 		window.display();
 	}
 
